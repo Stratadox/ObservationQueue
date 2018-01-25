@@ -19,7 +19,7 @@ class QueueingObservable extends RegularObservable
     public function trigger() : void
     {
         foreach ($this->subscribers() as $subscriber) {
-            $this->queue->add($subscriber, $this);
+            $this->queue->add($subscriber, 'notify', $this);
         }
         $this->queue->trigger();
     }
