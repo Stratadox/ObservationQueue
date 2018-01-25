@@ -20,6 +20,11 @@ class RegistersObservationOrder implements Observes
         $this->observations[] = $observable;
     }
 
+    public function update(IsObservable $observable) : void
+    {
+        $this->notify($observable);
+    }
+
     public function observation(int $number) : IsObservable
     {
         return $this->observations[$number];

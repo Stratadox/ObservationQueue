@@ -18,4 +18,9 @@ class TriggersObservableWhenNotified implements Observes
     {
         $this->bar->trigger();
     }
+
+    public function update(IsObservable $observable) : void
+    {
+        $this->notify($observable);
+    }
 }
