@@ -40,4 +40,19 @@ class Observations_collects_observation_objects extends TestCase
         self::assertNotContains($observation1, $collection);
         self::assertContains($observation2, $collection);
     }
+
+    /** @scenario */
+    function adding_an_observation()
+    {
+        $observation1 = $this->createMock(Observation::class);
+
+        $collection = new Observations($observation1);
+
+        $observation2 = $this->createMock(Observation::class);
+
+        $collection = $collection->add($observation2);
+
+        self::assertCount(2, $collection);
+        self::assertContains($observation2, $collection);
+    }
 }
