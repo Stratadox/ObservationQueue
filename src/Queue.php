@@ -8,19 +8,23 @@ class Queue implements QueuesObservations
 {
     private $observations;
 
+    public function __construct()
+    {
+        $this->observations = new Observations;
+    }
+
     public function add($observer, string $method, ...$params) : void
     {
-        $this->observations[] = [$observer, $method, $params];
+        $this->observations = $this->observations->add(
+            new Observation($observer, $method, ...$params)
+        );
     }
 
     public function trigger() : void
     {
-        foreach ($this->observations as $i => $observation) {
-            unset($this->observations[$i]);
-            call_user_func(
-                [$observation[0], $observation[1]],
-                ...$observation[2]
-            );
+        foreach ($this->observations as $observation) {
+            $this->observations = $this->observations->remove($observation);
+            $observation->trigger();
         }
     }
 }
