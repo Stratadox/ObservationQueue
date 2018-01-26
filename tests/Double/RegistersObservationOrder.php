@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Stratadox\ObservationQueue\Test\Double;
 
-class RegistersObservationOrder implements Observes
+use function count;
+use Countable;
+
+class RegistersObservationOrder implements Observes, Countable
 {
     private $observations = [];
 
@@ -28,5 +31,10 @@ class RegistersObservationOrder implements Observes
     public function observation(int $number) : IsObservable
     {
         return $this->observations[$number];
+    }
+
+    public function count()
+    {
+        return count($this->observations);
     }
 }

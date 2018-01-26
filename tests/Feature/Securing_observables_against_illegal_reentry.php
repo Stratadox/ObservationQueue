@@ -28,6 +28,7 @@ class Securing_observables_against_illegal_reentry extends TestCase
 
         self::assertSame($bar, $observer->observation(0));
         self::assertSame($foo, $observer->observation(1));
+        self::assertCount(2, $observer);
     }
 
     /** @scenario */
@@ -43,5 +44,6 @@ class Securing_observables_against_illegal_reentry extends TestCase
 
         self::assertSame($foo, $observer->observation(0));
         self::assertSame($bar, $observer->observation(1));
+        self::assertCount(2, $observer);
     }
 }
